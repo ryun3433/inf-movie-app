@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import Axios from "axios";
 import { useDispatch } from "react-redux";
 import { auth } from "../_actions/user_action";
 
@@ -14,10 +13,10 @@ export default function (SpecificComponent, option, adminRoute = null) {
             props.history.push("/login");
           }
         } else {
-          if (adminRoute && !response.payload.isAuth) {
+          if (adminRoute && !response.payload.isAdmin) {
             props.history.push("/");
           } else {
-            if (!option) {
+            if (option === false) {
               props.history.push("/");
             }
           }
@@ -25,7 +24,7 @@ export default function (SpecificComponent, option, adminRoute = null) {
       });
     }, []);
 
-    return <SpecificComponent />;
+    return <SpecificComponent {...props} />;
   }
 
   return AuthenticationCheck;

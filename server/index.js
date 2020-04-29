@@ -7,6 +7,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const { userRouter } = require("./routes/users");
+const { favoriteRouter } = require("./routes/favorite");
+
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
@@ -22,6 +24,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 
 app.use("/api/users", userRouter);
+app.use("/api/favorite", favoriteRouter);
 
 app.get("/", (req, res) => res.send("Hello World!"));
 
